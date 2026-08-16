@@ -12,4 +12,5 @@
 - [x] Expand Vitest coverage for protected task and control router procedures.
 - [x] Verify the rendered dashboard with persisted integration and repository data.
 - [ ] Complete owner OAuth in a browser session and verify the authenticated dashboard loads the seeded repository and integration records.
-- [ ] Save a project checkpoint and publish the reviewed source repository.
+- [x] Publish the reviewed source repository to the owner’s private GitHub account.
+- [ ] Save a project checkpoint after the final source sync.
