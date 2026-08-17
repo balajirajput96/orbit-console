@@ -11,6 +11,7 @@
 - [x] Add guarded n8n boundary controls for endpoint state and durable-hosting readiness.
 - [x] Expand Vitest coverage for protected task and control router procedures.
 - [x] Verify the rendered dashboard with persisted integration and repository data.
-- [ ] Complete owner OAuth in a browser session and verify the authenticated dashboard loads the seeded repository and integration records.
+- [x] Complete owner OAuth in a browser session and verify the authenticated dashboard loads the seeded repository and integration records.
 - [x] Publish the reviewed source repository to the owner’s private GitHub account.
-- [ ] Save a project checkpoint after the final source sync.
+- [x] Save a project checkpoint after the final source sync.
+- [x] Render read-only repository analysis reports with formatted Markdown.

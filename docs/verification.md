@@ -6,4 +6,10 @@ The managed project preview rendered the authenticated Orbit Console dashboard w
 
 ## Browser-session limitation
 
-The standalone sandbox browser reaches the Orbit Console sign-in page and then the Manus OAuth login form. It has no active Manus account session, so it cannot independently finish an end-to-end authenticated interaction without the owner signing in. No credentials were entered, no user account was created, and no external state was changed.
+The standalone browser initially reached the Orbit Console sign-in page and the Manus OAuth form. On 17 August 2026, the owner completed the supported OAuth flow. The authenticated dashboard then displayed the expected owner profile, **100 repository signals**, **3 connected surfaces**, all six seeded integration records, the local-only n8n boundary, and the repository analysis controls. A bounded metadata-only analysis then completed for one listed repository, with its generated read-only report and audit entry displayed in the Activity Trace. It neither cloned nor changed repository code.
+
+The authenticated browser was then closed after verification to release sandbox memory; no repository, n8n, credential, or account write action was performed.
+
+After the report-rendering refinement, the same authenticated control was invoked again to validate that a newly generated metadata-only report reaches the formatted report card.
+
+That repeat analysis completed successfully. The report card rendered headings, inline code, and structured learning opportunities with Markdown formatting, and the Activity Trace recorded the second read-only analysis. The browser session was closed afterward to minimize memory use.
