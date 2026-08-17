@@ -19,4 +19,4 @@
 - [x] Assess whether a zero-cost durable personal-computer runtime is attached for n8n activation.
 - [x] Validate non-secret readiness of configured n8n AI credentials and record required replacements.
 - [x] Document the provider readiness results and the n8n session reauthentication requirement in a dedicated status record.
-- [ ] Synchronize the verified deployment status to GitHub and save a rollout checkpoint.
+- [x] Synchronize the verified deployment status to GitHub and save a rollout checkpoint.
