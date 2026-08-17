@@ -20,3 +20,14 @@
 - [x] Validate non-secret readiness of configured n8n AI credentials and record required replacements.
 - [x] Document the provider readiness results and the n8n session reauthentication requirement in a dedicated status record.
 - [x] Synchronize the verified deployment status to GitHub and save a rollout checkpoint.
+- [x] Verify the latest Orbit Console commit and repository visibility on the owner's GitHub account.
+- [x] Change the owner-approved Orbit Console repository visibility from private to public and verify access.
+- [x] Inventory accessible GitHub repositories and identify reproducible build, test, or automation failures before any code remediation.
+- [x] Fix the redundant fork-triggered SageMaker delete-comment workflow in hub-docs and validate the workflow structure.
+- [x] Validate the updated hub-docs PR-close workflow path and confirm the removed redundant workflow does not run.
+- [x] Record durable post-change GitHub Actions evidence for hub-docs commits `7b626b9b` and `77c3f941`.
+- [x] Guard the remaining generic hub-docs delete-comment path so it does not invoke upstream-only resources in the fork.
+- [x] Query the PR #7 close-event Actions runs to confirm the redundant SageMaker delete workflow did not execute.
+- [x] Persist the merged hub-docs remediation evidence in a dedicated project status record.
+- [x] Diagnose and eliminate the remaining post-merge generic delete-comment workflow failure on hub-docs PR #7.
+- [ ] Verify the dedicated hub-docs remediation evidence record exists and synchronize it to source control.
