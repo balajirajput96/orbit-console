@@ -21,6 +21,12 @@ Cancelled Dependabot jobs on `pharma-qa-job-tracker`, `autonomous-ai-workspace`,
 
 Every remediation must first reproduce a concrete failure, stay on a reviewable branch, run the repository's documented validation, and use an ordinary commit. No `git rebase`, force push, credential changes, secret exposure, or workflow activation is performed merely because a historical run failed.
 
+## Deferred historical candidate
+
+The non-fork `B` repository has historical failed Azure Web Apps runs from 2025, but its current default branch contains only a minimal HTML README and a single active dynamic Copilot workflow. The historical Azure workflow file is no longer present in the current branch, so the old Azure failure cannot be reproduced or safely repaired from the current source. No code change was made to this repository.
+
+The `microsoft-365-agents-toolkit`, `openai-node`, `openai-agents-js`, and `uv` candidates are forks whose listed failures are historical workflow runs. A fresh filter of the 100-repository latest-run inventory found no remaining failures with an August 2026 timestamp after the hub-docs repair. Cancelled and queued Dependabot runs are recorded as non-code statuses until they either complete or reproduce a concrete project failure.
+
 ## Completed remediation
 
 The `hub-docs` failure on branch `fix/skip-sagemaker-upload-in-fork` was diagnosed with the authenticated Antigravity CLI and local workflow inspection. The branch contained both a generic closed-PR comment-deletion trigger and a redundant SageMaker-specific trigger. The stale SageMaker workflow was removed and the listener was narrowed to the remaining generic trigger in commit `7b626b9b` (`ci: remove redundant SageMaker delete-comment trigger`). The remaining generic trigger and listener were then guarded so they run only in `huggingface/hub-docs`, preventing the fork from invoking upstream-only resources; this was committed as `77c3f941` (`ci: skip delete comment workflows in forks`).

@@ -31,3 +31,4 @@
 - [x] Persist the merged hub-docs remediation evidence in a dedicated project status record.
 - [x] Diagnose and eliminate the remaining post-merge generic delete-comment workflow failure on hub-docs PR #7.
 - [x] Verify the dedicated hub-docs remediation evidence record exists and synchronize it to source control.
+- [x] Classify the B repository Azure workflow failure as historical and non-reproducible on current main.
