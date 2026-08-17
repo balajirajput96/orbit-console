@@ -15,3 +15,8 @@
 - [x] Publish the reviewed source repository to the owner’s private GitHub account.
 - [x] Save a project checkpoint after the final source sync.
 - [x] Render read-only repository analysis reports with formatted Markdown.
+- [x] Verify the published Orbit Console domain and record the active deployment boundary.
+- [x] Assess whether a zero-cost durable personal-computer runtime is attached for n8n activation.
+- [x] Validate non-secret readiness of configured n8n AI credentials and record required replacements.
+- [x] Document the provider readiness results and the n8n session reauthentication requirement in a dedicated status record.
+- [ ] Synchronize the verified deployment status to GitHub and save a rollout checkpoint.
