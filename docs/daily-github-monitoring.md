@@ -21,3 +21,9 @@ The deployed application needs a GitHub fine-grained personal access token store
 ## Pre-schedule validation
 
 The scan was exercised against all 100 persisted repository records using the server-side token. Initial sequential retrieval exceeded the scheduled-callback time budget; the implementation now retrieves GitHub API responses in bounded batches and persists each batch serially. A long Dependabot workflow title also exposed a database field-length boundary, which is now normalized before persistence. The corrected scan completed in approximately 12 seconds and stored every repository without unavailable records: **77 healthy, 1 pending, 11 failed, and 11 without a classified latest run**. The failed records remain read-only review signals, not automatic remediation commands.
+
+## Active production schedule
+
+The published application now has one enabled project-level schedule named `github-actions-daily`. It sends a `POST` request to `/api/scheduled/github-actions-health` at **09:15 UTC every day** (`0 15 9 * * *`). The persisted schedule identifier is checked against the scheduler-authenticated request before a scan is allowed to run. The scheduled handler accepts no user-controlled repository or task input.
+
+The production endpoint responds with a cron-permission error to an unauthenticated `POST`, confirming that the deployed route is present and rejects ordinary callers. A short-lived one-minute scheduler probe was registered to validate a cron-authenticated callback immediately, but the scheduler had not recorded a run during the observation window; the probe was deleted. The permanent daily job remains the only enabled schedule and its first platform execution should be reviewed through scheduler logs after 09:15 UTC.

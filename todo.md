@@ -35,7 +35,9 @@
 - [x] Design an idempotent daily GitHub Actions health scan and data model for Orbit Console.
 - [x] Verify the daily GitHub monitoring design record exists before implementing the scheduled scan.
 - [x] Add a server-side GitHub credential for the automated scan without exposing it to the client.
-- [ ] Implement, test, publish, and schedule the daily GitHub Actions monitoring feature.
+- [x] Implement, test, publish, and schedule the daily GitHub Actions monitoring feature.
+- [x] Verify the published production deployment includes the GitHub Actions monitoring release.
+- [ ] Verify the deployed scheduled endpoint accepts the production scheduler identity before closing the rollout.
 - [x] Replace the GitHub monitoring token with read-only access to private repositories so all 100 inventory records can be scanned.
 - [x] Optimize the GitHub Actions scan so network timeout failures do not mask public repository workflow status.
 - [x] Normalize GitHub workflow metadata to the database field limits so a single long workflow name cannot stop the daily scan.
