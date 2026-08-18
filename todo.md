@@ -49,4 +49,4 @@
 - [x] Safely inventory the uploaded non-sensitive exports, archives, notebook, and partial installer without executing untrusted content.
 - [x] Treat the uploaded recovery-code file as compromised, document its exclusion from all project artifacts, and rotate the codes before future use.
 - [x] Review non-sensitive n8n workflow and application exports for reusable, review-gated Orbit Console automation assets.
-- [ ] Document or integrate validated uploaded assets and publish any approved follow-on changes.
+- [x] Synchronize the approved uploaded-asset intake record to GitHub and verify the remote commit before closing the publication step.
