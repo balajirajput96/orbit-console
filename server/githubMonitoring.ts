@@ -3,7 +3,7 @@ import { ENV } from "./_core/env";
 import { sdk } from "./_core/sdk";
 import {
   getAutomationScheduleByKey,
-  getUserByOpenId,
+  getPrimaryAdminUser,
   listRepositoryInventory,
   logAuditEntry,
   upsertGitHubWorkflowHealth,
@@ -137,7 +137,7 @@ export async function handleGitHubActionsHealthSchedule(req: Request, res: Respo
     }
 
     const result = await scanGitHubActionsHealth();
-    const owner = await getUserByOpenId(ENV.ownerOpenId);
+    const owner = await getPrimaryAdminUser();
     if (owner) {
       await logAuditEntry(owner.id, "github", "Daily Actions health scan completed", `Scanned ${result.scanned} repositories: ${result.summary.failed} failed, ${result.summary.pending} pending, ${result.summary.unavailable} unavailable.`);
     }

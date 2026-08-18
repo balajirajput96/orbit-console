@@ -38,6 +38,7 @@
 - [x] Implement, test, publish, and schedule the daily GitHub Actions monitoring feature.
 - [x] Verify the published production deployment includes the GitHub Actions monitoring release.
 - [ ] Verify the deployed scheduled endpoint accepts the production scheduler identity before closing the rollout.
+- [ ] Fix the scheduled health scan owner audit lookup so each successful run appears in the dashboard activity trace.
 - [x] Replace the GitHub monitoring token with read-only access to private repositories so all 100 inventory records can be scanned.
 - [x] Optimize the GitHub Actions scan so network timeout failures do not mask public repository workflow status.
 - [x] Normalize GitHub workflow metadata to the database field limits so a single long workflow name cannot stop the daily scan.

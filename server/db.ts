@@ -89,6 +89,13 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
+export async function getPrimaryAdminUser() {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(users).where(eq(users.role, "admin")).orderBy(desc(users.lastSignedIn)).limit(1);
+  return result[0];
+}
+
 export async function listAgentTasks(ownerId: number) {
   const db = await getDb();
   if (!db) return [];
