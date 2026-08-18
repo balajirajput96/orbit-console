@@ -42,3 +42,7 @@
 - [x] Replace the GitHub monitoring token with read-only access to private repositories so all 100 inventory records can be scanned.
 - [x] Optimize the GitHub Actions scan so network timeout failures do not mask public repository workflow status.
 - [x] Normalize GitHub workflow metadata to the database field limits so a single long workflow name cannot stop the daily scan.
+- [ ] Obtain GitHub security-alert read access and reconcile the public repository's actual Dependabot alerts with the applied dependency remediation.
+- [x] Perform a local dependency audit and apply validated package remediations for known Orbit Console vulnerabilities.
+- [x] Improve the dashboard's provider and n8n durable-hosting readiness guidance without storing or exposing credentials.
+- [ ] Validate, publish, and synchronize the follow-on security and readiness improvements.
