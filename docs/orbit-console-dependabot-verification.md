@@ -24,4 +24,4 @@ The repository dependency graph was updated using the package-manager security r
 | Production build | Passed (`pnpm build`) |
 | Local package audit | No known vulnerabilities (`pnpm audit`) |
 
-The GitHub alerts remain open until the updated lockfile is published to the repository and GitHub refreshes the dependency graph. No alert was dismissed; resolution is based on the dependency update and must be verified in GitHub after publication.
+After the merged dependency graph was published, GitHub closed alert #3. A follow-up authenticated GitHub review briefly showed one remaining low-severity alert (#133), so a repository-level Dependabot refresh was requested. The refreshed GitHub page reported **0 open alerts and 133 closed alerts**. No alert was dismissed; GitHub reconciled the published dependency graph.
