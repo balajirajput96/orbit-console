@@ -68,8 +68,34 @@ export const integrationStates = mysqlTable("integration_states", {
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
+export const githubWorkflowHealth = mysqlTable("github_workflow_health", {
+  id: int("id").autoincrement().primaryKey(),
+  fullName: varchar("fullName", { length: 240 }).notNull().unique(),
+  workflowName: varchar("workflowName", { length: 240 }),
+  runId: varchar("runId", { length: 40 }),
+  branch: varchar("branch", { length: 240 }),
+  status: varchar("status", { length: 40 }).notNull(),
+  conclusion: varchar("conclusion", { length: 80 }),
+  health: mysqlEnum("health", ["healthy", "pending", "failed", "unavailable", "unknown"]).notNull(),
+  sourceUrl: varchar("sourceUrl", { length: 512 }).notNull(),
+  runUpdatedAt: timestamp("runUpdatedAt"),
+  observedAt: timestamp("observedAt").defaultNow().notNull(),
+});
+
+export const automationSchedules = mysqlTable("automation_schedules", {
+  id: int("id").autoincrement().primaryKey(),
+  scheduleKey: varchar("scheduleKey", { length: 100 }).notNull().unique(),
+  cronTaskUid: varchar("cronTaskUid", { length: 80 }).notNull().unique(),
+  cronExpression: varchar("cronExpression", { length: 80 }).notNull(),
+  isEnabled: int("isEnabled").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
 export type AgentTask = typeof agentTasks.$inferSelect;
 export type InsertAgentTask = typeof agentTasks.$inferInsert;
 export type AuditEntry = typeof auditEntries.$inferSelect;
 export type RepositoryInventory = typeof repositoryInventory.$inferSelect;
 export type IntegrationState = typeof integrationStates.$inferSelect;
+export type GitHubWorkflowHealth = typeof githubWorkflowHealth.$inferSelect;
+export type AutomationSchedule = typeof automationSchedules.$inferSelect;

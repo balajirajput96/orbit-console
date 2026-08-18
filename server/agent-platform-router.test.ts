@@ -6,6 +6,7 @@ const dbMocks = vi.hoisted(() => ({
   getRepositoryByFullName: vi.fn(),
   listAgentTasks: vi.fn(),
   listAuditEntries: vi.fn(),
+  listGitHubWorkflowHealth: vi.fn(),
   listIntegrationStates: vi.fn(),
   listRepositoryInventory: vi.fn(),
   logAuditEntry: vi.fn(),
@@ -76,6 +77,14 @@ describe("Orbit protected router boundaries", () => {
 
     await expect(caller.control.integrations()).resolves.toEqual([{ integrationKey: "github", label: "GitHub", status: "connected", mode: "read-first", detail: "Inventory available." }]);
     expect(dbMocks.listIntegrationStates).toHaveBeenCalledOnce();
+  });
+
+  it("returns persisted GitHub Actions health records without exposing credentials", async () => {
+    dbMocks.listGitHubWorkflowHealth.mockResolvedValue([{ fullName: "balajirajput96/orbit-console", workflowName: "CI", health: "healthy", status: "completed", conclusion: "success" }]);
+    const caller = appRouter.createCaller(createAuthContext());
+
+    await expect(caller.control.githubHealth()).resolves.toEqual([{ fullName: "balajirajput96/orbit-console", workflowName: "CI", health: "healthy", status: "completed", conclusion: "success" }]);
+    expect(dbMocks.listGitHubWorkflowHealth).toHaveBeenCalledOnce();
   });
 
   it("analyzes only stored repository metadata and writes a read-only audit record", async () => {

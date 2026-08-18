@@ -1,6 +1,6 @@
 import { and, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { agentTasks, auditEntries, InsertAgentTask, InsertUser, integrationStates, repositoryInventory, users } from "../drizzle/schema";
+import { agentTasks, auditEntries, automationSchedules, githubWorkflowHealth, InsertAgentTask, InsertUser, integrationStates, repositoryInventory, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -178,6 +178,65 @@ export async function upsertIntegrationState(input: {
       mode: input.mode,
       detail: input.detail,
       verifiedAt: input.verifiedAt,
+    },
+  });
+}
+
+export async function listGitHubWorkflowHealth() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(githubWorkflowHealth).orderBy(desc(githubWorkflowHealth.observedAt)).limit(100);
+}
+
+export async function upsertGitHubWorkflowHealth(input: {
+  fullName: string;
+  workflowName: string | null;
+  runId: string | null;
+  branch: string | null;
+  status: string;
+  conclusion: string | null;
+  health: "healthy" | "pending" | "failed" | "unavailable" | "unknown";
+  sourceUrl: string;
+  runUpdatedAt: Date | null;
+  observedAt: Date;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  await db.insert(githubWorkflowHealth).values(input).onDuplicateKeyUpdate({
+    set: {
+      workflowName: input.workflowName,
+      runId: input.runId,
+      branch: input.branch,
+      status: input.status,
+      conclusion: input.conclusion,
+      health: input.health,
+      sourceUrl: input.sourceUrl,
+      runUpdatedAt: input.runUpdatedAt,
+      observedAt: input.observedAt,
+    },
+  });
+}
+
+export async function getAutomationScheduleByKey(scheduleKey: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(automationSchedules).where(eq(automationSchedules.scheduleKey, scheduleKey)).limit(1);
+  return result[0];
+}
+
+export async function upsertAutomationSchedule(input: {
+  scheduleKey: string;
+  cronTaskUid: string;
+  cronExpression: string;
+  isEnabled: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable");
+  await db.insert(automationSchedules).values(input).onDuplicateKeyUpdate({
+    set: {
+      cronTaskUid: input.cronTaskUid,
+      cronExpression: input.cronExpression,
+      isEnabled: input.isEnabled,
     },
   });
 }

@@ -5,7 +5,7 @@ import { generateImage } from "./_core/imageGeneration";
 import { invokeLLM } from "./_core/llm";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { createAgentTask, getRepositoryByFullName, listAgentTasks, listAuditEntries, listIntegrationStates, listRepositoryInventory, logAuditEntry, updateAgentTaskStatus } from "./db";
+import { createAgentTask, getRepositoryByFullName, listAgentTasks, listAuditEntries, listGitHubWorkflowHealth, listIntegrationStates, listRepositoryInventory, logAuditEntry, updateAgentTaskStatus } from "./db";
 
 const taskInput = z.object({
   title: z.string().trim().min(3).max(240),
@@ -70,6 +70,7 @@ export const appRouter = router({
   control: router({
     integrations: protectedProcedure.query(() => listIntegrationStates()),
     repositories: protectedProcedure.query(() => listRepositoryInventory()),
+    githubHealth: protectedProcedure.query(() => listGitHubWorkflowHealth()),
     audit: protectedProcedure.query(({ ctx }) => listAuditEntries(ctx.user.id)),
     automationReadiness: protectedProcedure.query(() => ({
       state: "review_required",
