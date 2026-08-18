@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
+const hasGitHubToken = Boolean(process.env.GITHUB_TOKEN);
+
 describe("GitHub monitoring credential", () => {
-  it("authenticates the configured server-side token against the GitHub user endpoint", async () => {
+  it.skipIf(!hasGitHubToken)("authenticates the configured server-side token against the GitHub user endpoint", async () => {
     const token = process.env.GITHUB_TOKEN;
 
     expect(token, "GITHUB_TOKEN must be available only on the server").toBeTruthy();
