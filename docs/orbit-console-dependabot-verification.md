@@ -29,4 +29,4 @@ After a frozen install, `pnpm why esbuild` reported **one installed version only
 | Production build | Passed (`pnpm build`) |
 | Resolved `esbuild` graph | Passed (one version: `0.28.2`) |
 
-The verified lockfile and this evidence record are published to the default branch. GitHub should reconcile and close alert #3 when it processes the updated dependency graph; the alert should not be dismissed manually.
+The verified lockfile and this evidence record were published to the default branch in commit `ea40f7c`. An authenticated GitHub review at **08:11 UTC on 21 August 2026** confirmed that Dependabot **closed alert #3 as completed** against that commit. The alert was not dismissed manually.
