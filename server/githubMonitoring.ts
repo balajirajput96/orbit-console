@@ -38,16 +38,30 @@ type GitHubHealthRecord = {
 
 export type GitHubHealthState = "healthy" | "pending" | "failed" | "unavailable" | "unknown";
 
+export const GITHUB_WORKFLOW_STALE_AFTER_MS = 30 * 24 * 60 * 60 * 1000;
+
 export function truncateGitHubField(value: string | null | undefined, maxLength: number): string | null {
   if (!value) return null;
   return value.length <= maxLength ? value : `${value.slice(0, maxLength - 1)}…`;
 }
 
-export function classifyGitHubWorkflowRun(run: Pick<GitHubWorkflowRun, "status" | "conclusion"> | null): GitHubHealthState {
+export function isStaleGitHubWorkflowRun(
+  run: Pick<GitHubWorkflowRun, "updated_at"> | null,
+  observedAt: Date = new Date()
+): boolean {
+  if (!run?.updated_at) return false;
+  const updatedAt = new Date(run.updated_at);
+  if (Number.isNaN(updatedAt.getTime())) return false;
+  return observedAt.getTime() - updatedAt.getTime() > GITHUB_WORKFLOW_STALE_AFTER_MS;
+}
+
+export function classifyGitHubWorkflowRun(run: Pick<GitHubWorkflowRun, "status" | "conclusion" | "updated_at"> | null, observedAt: Date = new Date()): GitHubHealthState {
   if (!run) return "unknown";
+  if (isStaleGitHubWorkflowRun(run, observedAt)) return "unknown";
   if (run.status !== "completed") return "pending";
+  if (run.conclusion === "cancelled") return "unknown";
   if (run.conclusion === "success" || run.conclusion === "skipped" || run.conclusion === "neutral") return "healthy";
-  if (["failure", "cancelled", "timed_out", "action_required", "startup_failure", "stale"].includes(run.conclusion ?? "")) return "failed";
+  if (["failure", "timed_out", "action_required", "startup_failure", "stale"].includes(run.conclusion ?? "")) return "failed";
   return "unknown";
 }
 

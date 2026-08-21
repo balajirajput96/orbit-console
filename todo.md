@@ -50,3 +50,20 @@
 - [x] Treat the uploaded recovery-code file as compromised, document its exclusion from all project artifacts, and rotate the codes before future use.
 - [x] Review non-sensitive n8n workflow and application exports for reusable, review-gated Orbit Console automation assets.
 - [x] Synchronize the approved uploaded-asset intake record to GitHub and verify the remote commit before closing the publication step.
+- [x] Inventory current failed GitHub workflow and build signals across owner-controlled repositories.
+- [x] Classify failures as reproducible, historical, external, or unavailable before making code changes.
+- [ ] Fix and validate reproducible owner-controlled failures, then publish the verified remediation record.
+- [ ] Correct false failure classification when a repository's latest workflow run is historical or cancelled Dependabot automation rather than a current code failure.
+- [x] Repair and validate the AgentGPT platform workflow's unavailable MySQL service image and Black formatting failure.
+- [x] Repair and validate the AgentGPT production Docker build failure caused by the retired Debian Buster base image.
+- [x] Repair and validate the AgentGPT frontend deployment failure caused by its missing Docker prod stage.
+- [x] Audit the existing Orbit Console schedule, GitHub monitoring state, and recently repaired repository workflows for a safe continuation baseline.
+- [ ] Add a bounded, review-gated continuation policy that records durable remediation state without executing untrusted code or modifying repositories blindly.
+- [ ] Validate and publish the continuation policy and any approved monitoring improvements.
+- [x] Define a bounded GitHub scheduled-maintenance policy for selected owner-controlled repositories.
+- [x] Add scheduled repository validation workflows without automatic merging or secret disclosure.
+- [x] Add a repository-safe, reviewable remediation-draft artifact to the scheduled maintenance workflows and verify it on AgentGPT and fastmcp.
+- [x] Add a repository-safe, reviewable remediation-draft artifact to the scheduled maintenance workflows and verify it on AgentGPT and fastmcp.
+- [x] Correct AgentGPT maintenance state persistence for repositories with Issues disabled and install Poetry before any dependency cache lookup.
+- [ ] Validate and publish the selected GitHub maintenance workflows and their audit record.
+- [x] Repair and validate the fastmcp workflow's reported Prettier formatting failures.
