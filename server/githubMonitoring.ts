@@ -123,8 +123,10 @@ async function fetchRepositoryHealth(repository: Repository, observedAt: Date): 
 }
 
 export async function scanGitHubActionsHealth() {
-  if (!ENV.githubToken) throw new Error("GITHUB_TOKEN is not configured for the scheduled GitHub health scan.");
   const repositories = await listRepositoryInventory();
+  if (repositories.length > 0 && !ENV.githubToken) {
+    throw new Error("GITHUB_TOKEN is not configured for the scheduled GitHub health scan.");
+  }
   const observedAt = new Date();
   const summary: Record<GitHubHealthState, number> = { healthy: 0, pending: 0, failed: 0, unavailable: 0, unknown: 0 };
   const batchSize = 8;
