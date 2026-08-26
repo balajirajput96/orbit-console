@@ -73,3 +73,9 @@
 - [x] Complete a safe end-to-end automation readiness audit, publish any remaining repository-safe improvements, and record owner-dependent blockers.
 - [x] Confirm that the readiness audit identifies no additional repository-safe implementation work.
 - [x] Save and synchronize the credential-safe automation readiness audit to the public Orbit Console repository.
+- [x] Verify the current AgentGPT and fastmcp maintenance workflow results and publish any remaining repository-safe completion record.
+- [x] Refresh and verify the overdue daily GitHub health-scan schedule without changing its endpoint, cadence, or scope.
+- [x] Attempt a post-refresh daily health-scan execution, document the external scheduler non-execution, and restore the original daily cadence.
+- [x] Record that the original schedule could not be re-armed and replace it with a newly authorized daily task at the original cadence.
+- [x] Replace the stale scheduler registration with an equivalent enabled task and persist its new authorized task identity before retiring the old trigger.
+- [ ] Save and publish the final maintenance verification record, including the external scheduler delivery blocker and replacement-task configuration.
