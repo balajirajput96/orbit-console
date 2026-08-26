@@ -78,4 +78,4 @@
 - [x] Attempt a post-refresh daily health-scan execution, document the external scheduler non-execution, and restore the original daily cadence.
 - [x] Record that the original schedule could not be re-armed and replace it with a newly authorized daily task at the original cadence.
 - [x] Replace the stale scheduler registration with an equivalent enabled task and persist its new authorized task identity before retiring the old trigger.
-- [ ] Save and publish the final maintenance verification record, including the external scheduler delivery blocker and replacement-task configuration.
+- [x] Save and publish the final maintenance verification record, including the external scheduler delivery blocker and replacement-task configuration.
